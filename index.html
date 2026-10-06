@@ -1,935 +1,1387 @@
-position: fixed;
+<!DOCTYPE html>
 
-        right: 25px;
-        bottom: 25px;
+<html lang="es">
 
-        max-width: 380px;
+<head>
 
-        padding: 16px 18px;
+  <meta charset="UTF-8">
 
-        border:
-            1px solid rgba(255, 255, 255, 0.1);
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        border-radius: 12px;
+  <title>BASEMAX | Wealth Management</title>
 
-        background:
-            rgba(12, 27, 43, 0.96);
+  <style>
 
-        box-shadow:
-            0 20px 50px rgba(0, 0, 0, 0.4);
+    * {
 
-        color: #d8e1ea;
+      box-sizing: border-box;
 
-        font-size: 13px;
-        line-height: 1.5;
-
-        opacity: 0;
-
-        transform: translateY(15px);
-
-        pointer-events: none;
-
-        transition: 0.3s ease;
-
-        z-index: 20;
     }
 
-    .toast.show {
-        opacity: 1;
-        transform: translateY(0);
+    :root {
+
+      --navy: #071426;
+
+      --navy-2: #0b1d35;
+
+      --blue: #1d5fd1;
+
+      --blue-light: #4c8dff;
+
+      --silver: #aeb9c8;
+
+      --text: #172033;
+
+      --muted: #738096;
+
+      --border: #dce2ea;
+
+      --white: #ffffff;
+
     }
 
-    .toast strong {
-        display: block;
+    body {
 
-        margin-bottom: 4px;
+      margin: 0;
 
-        color: #ffffff;
+      min-height: 100vh;
 
-        font-size: 14px;
+      font-family:
+
+        Inter,
+
+        -apple-system,
+
+        BlinkMacSystemFont,
+
+        "Segoe UI",
+
+        Arial,
+
+        sans-serif;
+
+      background:
+
+        radial-gradient(
+
+          circle at 20% 20%,
+
+          rgba(50, 110, 190, 0.16),
+
+          transparent 32%
+
+        ),
+
+        #071426;
+
+      color: var(--text);
+
     }
 
     /* =========================
-       TABLET / MOBILE
+
+       MAIN LAYOUT
+
+    ========================= */
+
+    .page {
+
+      min-height: 100vh;
+
+      display: grid;
+
+      grid-template-columns: 1fr 520px;
+
+    }
+
+    /* =========================
+
+       LEFT BRAND AREA
+
+    ========================= */
+
+    .brand-panel {
+
+      position: relative;
+
+      overflow: hidden;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: space-between;
+
+      padding: 46px 7vw;
+
+      color: white;
+
+      background:
+
+        linear-gradient(
+
+          135deg,
+
+          rgba(6, 20, 38, 0.96),
+
+          rgba(10, 34, 62, 0.94)
+
+        );
+
+    }
+
+    .brand-panel::before {
+
+      content: "";
+
+      position: absolute;
+
+      width: 520px;
+
+      height: 520px;
+
+      border-radius: 50%;
+
+      right: -220px;
+
+      top: -170px;
+
+      background: rgba(72, 132, 218, 0.10);
+
+      filter: blur(4px);
+
+    }
+
+    .brand-panel::after {
+
+      content: "";
+
+      position: absolute;
+
+      width: 360px;
+
+      height: 360px;
+
+      border-radius: 50%;
+
+      left: -170px;
+
+      bottom: -180px;
+
+      border: 1px solid rgba(255, 255, 255, 0.08);
+
+    }
+
+    .brand-logo {
+
+      position: relative;
+
+      z-index: 2;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 13px;
+
+      font-size: 22px;
+
+      font-weight: 800;
+
+      letter-spacing: 2px;
+
+    }
+
+    .logo-mark {
+
+      width: 38px;
+
+      height: 38px;
+
+      display: grid;
+
+      place-items: center;
+
+      border: 1px solid rgba(255,255,255,0.25);
+
+      border-radius: 11px;
+
+      background: linear-gradient(
+
+        135deg,
+
+        #173b67,
+
+        #0d223d
+
+      );
+
+      box-shadow:
+
+        inset 0 1px 0 rgba(255,255,255,0.12),
+
+        0 10px 30px rgba(0,0,0,0.25);
+
+    }
+
+    .logo-mark span {
+
+      width: 16px;
+
+      height: 16px;
+
+      border: 2px solid #aebfd4;
+
+      transform: rotate(45deg);
+
+      border-radius: 3px;
+
+    }
+
+    .brand-content {
+
+      position: relative;
+
+      z-index: 2;
+
+      max-width: 600px;
+
+      margin: auto 0;
+
+      padding: 70px 0;
+
+    }
+
+    .eyebrow {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      color: #b8c9dd;
+
+      font-size: 12px;
+
+      font-weight: 700;
+
+      letter-spacing: 2px;
+
+      text-transform: uppercase;
+
+      margin-bottom: 22px;
+
+    }
+
+    .eyebrow::before {
+
+      content: "";
+
+      width: 25px;
+
+      height: 1px;
+
+      background: #7694b7;
+
+    }
+
+    .brand-content h2 {
+
+      margin: 0;
+
+      max-width: 600px;
+
+      font-size: clamp(38px, 4vw, 62px);
+
+      line-height: 1.05;
+
+      font-weight: 500;
+
+      letter-spacing: -2px;
+
+    }
+
+    .brand-content h2 strong {
+
+      font-weight: 750;
+
+    }
+
+    .brand-description {
+
+      max-width: 500px;
+
+      margin-top: 25px;
+
+      color: #aab9ca;
+
+      font-size: 16px;
+
+      line-height: 1.8;
+
+    }
+
+    .security-badge {
+
+      position: relative;
+
+      z-index: 2;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+
+      color: #aebdcd;
+
+      font-size: 12px;
+
+    }
+
+    .security-icon {
+
+      width: 32px;
+
+      height: 32px;
+
+      display: grid;
+
+      place-items: center;
+      border: 1px solid rgba(255,255,255,0.13);
+
+      border-radius: 9px;
+
+      background: rgba(255,255,255,0.04);
+
+    }
+
+    /* =========================
+
+       LOGIN PANEL
+
+    ========================= */
+
+    .login-panel {
+
+      min-height: 100vh;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      padding: 35px;
+
+      background: #f5f7fa;
+
+    }
+
+    .login-card {
+
+      width: 100%;
+
+      max-width: 410px;
+
+      padding: 42px;
+
+      border: 1px solid rgba(255,255,255,0.7);
+
+      border-radius: 22px;
+
+      background: rgba(255,255,255,0.88);
+
+      box-shadow:
+
+        0 30px 70px rgba(3, 15, 32, 0.12),
+
+        0 8px 25px rgba(3, 15, 32, 0.05);
+
+      backdrop-filter: blur(18px);
+
+      animation: cardIn 0.6s ease both;
+
+    }
+
+    @keyframes cardIn {
+
+      from {
+
+        opacity: 0;
+
+        transform: translateY(16px);
+
+      }
+
+      to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+      }
+
+    }
+
+    .mobile-logo {
+
+      display: none;
+
+      justify-content: center;
+
+      align-items: center;
+
+      gap: 10px;
+
+      margin-bottom: 34px;
+
+      color: var(--navy);
+
+      font-weight: 800;
+
+      letter-spacing: 2px;
+
+    }
+
+    .mobile-logo .logo-mark {
+
+      width: 32px;
+
+      height: 32px;
+
+      border-color: #d7dee8;
+
+      background: linear-gradient(
+
+        135deg,
+
+        #f5f8fc,
+
+        #dfe7f0
+
+      );
+
+    }
+
+    .mobile-logo .logo-mark span {
+
+      border-color: #193a62;
+
+    }
+
+    .login-card h1 {
+
+      margin: 0;
+
+      font-size: 31px;
+
+      letter-spacing: -0.8px;
+
+      font-weight: 700;
+
+      color: #101a2a;
+
+    }
+
+    .login-subtitle {
+
+      margin: 10px 0 31px;
+
+      color: var(--muted);
+
+      font-size: 14px;
+
+      line-height: 1.6;
+
+    }
+
+    /* =========================
+
+       FORM
+
+    ========================= */
+
+    .field {
+
+      margin-bottom: 19px;
+
+    }
+
+    .field label {
+
+      display: block;
+
+      margin-bottom: 8px;
+
+      color: #303b4c;
+
+      font-size: 13px;
+
+      font-weight: 650;
+
+    }
+
+    .input-wrap {
+
+      position: relative;
+
+    }
+
+    .input-wrap input {
+
+      width: 100%;
+
+      height: 52px;
+
+      padding: 0 15px;
+
+      border: 1px solid var(--border);
+
+      border-radius: 11px;
+
+      outline: none;
+
+      background: #fbfcfd;
+
+      color: #172033;
+
+      font-size: 14px;
+
+      transition:
+
+        border-color 0.2s,
+
+        box-shadow 0.2s,
+
+        background 0.2s;
+
+    }
+
+    .input-wrap input::placeholder {
+
+      color: #a0aaba;
+
+    }
+
+    .input-wrap input:focus {
+
+      border-color: #477bc5;
+
+      background: white;
+
+      box-shadow: 0 0 0 4px rgba(39, 98, 177, 0.08);
+
+    }
+
+    .password-input {
+
+      padding-right: 75px !important;
+
+    }
+
+    .toggle-password {
+
+      position: absolute;
+
+      top: 50%;
+
+      right: 12px;
+
+      transform: translateY(-50%);
+
+      border: 0;
+
+      background: transparent;
+
+      color: #315f99;
+
+      font-size: 12px;
+
+      font-weight: 650;
+
+      cursor: pointer;
+
+      padding: 7px;
+
+    }
+
+    .form-row {
+
+      display: flex;
+
+      justify-content: flex-end;
+
+      margin: -3px 0 22px;
+
+    }
+
+    .forgot {
+
+      color: #315f99;
+
+      text-decoration: none;
+
+      font-size: 12px;
+
+      font-weight: 600;
+
+    }
+
+    .forgot:hover {
+
+      text-decoration: underline;
+
+    }
+
+    /* =========================
+
+       LOGIN BUTTON
+
+    ========================= */
+
+    .login-button {
+
+      position: relative;
+
+      width: 100%;
+
+      height: 52px;
+
+      border: 0;
+
+      border-radius: 11px;
+
+      color: white;
+
+      background:
+
+        linear-gradient(
+
+          115deg,
+
+          #153d70,
+
+          #2568c8,
+
+          #397de0
+
+        );
+
+      font-size: 14px;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      overflow: hidden;
+
+      box-shadow:
+
+        0 10px 22px rgba(29, 95, 185, 0.22);
+
+      transition:
+
+        transform 0.2s,
+
+        box-shadow 0.2s;
+
+    }
+
+    .login-button:hover {
+
+      transform: translateY(-1px);
+
+      box-shadow:
+        0 13px 27px rgba(29, 95, 185, 0.28);
+
+    }
+
+    .login-button:active {
+
+      transform: translateY(0);
+
+    }
+
+    .login-button.loading {
+
+      pointer-events: none;
+
+    }
+
+    .button-text {
+
+      transition: opacity 0.2s;
+
+    }
+
+    .spinner {
+
+      position: absolute;
+
+      width: 19px;
+
+      height: 19px;
+
+      left: 50%;
+
+      top: 50%;
+
+      margin: -9.5px 0 0 -9.5px;
+
+      border: 2px solid rgba(255,255,255,0.35);
+
+      border-top-color: white;
+
+      border-radius: 50%;
+
+      opacity: 0;
+
+      animation: spin 0.7s linear infinite;
+
+    }
+
+    .login-button.loading .button-text {
+
+      opacity: 0;
+
+    }
+
+    .login-button.loading .spinner {
+
+      opacity: 1;
+
+    }
+
+    @keyframes spin {
+
+      to {
+
+        transform: rotate(360deg);
+
+      }
+
+    }
+
+    /* =========================
+
+       SECURITY
+
+    ========================= */
+
+    .secure-note {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 7px;
+
+      margin-top: 22px;
+
+      color: #8792a2;
+
+      font-size: 11px;
+
+    }
+
+    .secure-dot {
+
+      width: 6px;
+
+      height: 6px;
+
+      border-radius: 50%;
+
+      background: #4b8b6b;
+
+      box-shadow: 0 0 0 4px rgba(75,139,107,0.08);
+
+    }
+
+    /* =========================
+
+       TOAST
+
+    ========================= */
+
+    .toast {
+
+      position: fixed;
+
+      z-index: 100;
+
+      right: 26px;
+
+      bottom: 26px;
+
+      display: flex;
+
+      align-items: flex-start;
+
+      gap: 11px;
+
+      min-width: 290px;
+
+      max-width: 380px;
+
+      padding: 15px 17px;
+
+      border: 1px solid rgba(220, 226, 234, 0.9);
+
+      border-radius: 13px;
+
+      background: rgba(255,255,255,0.96);
+
+      box-shadow:
+
+        0 16px 40px rgba(0,0,0,0.13);
+
+      backdrop-filter: blur(16px);
+
+      opacity: 0;
+
+      transform: translateY(15px);
+
+      pointer-events: none;
+
+      transition:
+
+        opacity 0.25s,
+
+        transform 0.25s;
+
+    }
+
+    .toast.show {
+
+      opacity: 1;
+
+      transform: translateY(0);
+
+    }
+
+    .toast-icon {
+
+      width: 27px;
+
+      height: 27px;
+
+      flex: 0 0 27px;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: 50%;
+
+      background: #eef3f8;
+
+      color: #345d88;
+
+      font-size: 13px;
+
+    }
+
+    .toast-title {
+
+      margin-bottom: 2px;
+
+      color: #182335;
+
+      font-size: 13px;
+
+      font-weight: 700;
+
+    }
+
+    .toast-message {
+
+      color: #7b8797;
+
+      font-size: 11px;
+
+      line-height: 1.5;
+
+    }
+
+    /* =========================
+
+       RESPONSIVE
+
     ========================= */
 
     @media (max-width: 900px) {
 
-        body {
-            padding: 18px;
-        }
+      .page {
 
-        .page {
-            grid-template-columns: 1fr;
+        grid-template-columns: 1fr;
 
-            max-width: 520px;
+      }
 
-            min-height: auto;
-        }
+      .brand-panel {
 
-        .brand-panel {
-            min-height: 310px;
+        display: none;
 
-            padding: 35px;
-        }
+      }
 
-        .brand-title {
-            margin-top: 55px;
+      .login-panel {
 
-            font-size: 35px;
-        }
+        min-height: 100vh;
 
-        .brand-description {
-            font-size: 14px;
-        }
+        padding: 24px;
 
-        .login-panel {
-            padding: 35px;
-        }
+      }
+
+      .mobile-logo {
+
+        display: flex;
+
+      }
+
+      .login-card {
+
+        max-width: 430px;
+
+      }
+
     }
 
-    @media (max-width: 500px) {
+    @media (max-width: 480px) {
 
-        body {
-            padding: 0;
-        }
+      .login-panel {
 
-        .page {
-            min-height: 100vh;
+        padding: 16px;
 
-            border-radius: 0;
+        align-items: center;
 
-            border: 0;
-        }
+      }
 
-        .brand-panel {
-            padding: 30px 25px;
+      .login-card {
 
-            min-height: 280px;
-        }
+        padding: 31px 22px 25px;
 
-        .brand-title {
-            margin-top: 50px;
+        border-radius: 18px;
 
-            font-size: 31px;
-        }
+        box-shadow:
 
-        .brand-description {
-            display: none;
-        }
+          0 18px 45px rgba(3, 15, 32, 0.08);
 
-        .login-panel {
-            padding: 35px 25px;
+      }
 
-            align-items: flex-start;
-        }
+      .mobile-logo {
 
-        .login-heading {
-            font-size: 29px;
-        }
+        margin-bottom: 29px;
 
-        .toast {
-            left: 18px;
-            right: 18px;
+      }
 
-            bottom: 18px;
+      .login-card h1 {
 
-            max-width: none;
-        }
+        font-size: 28px;
+
+      }
+
+      .toast {
+
+        left: 16px;
+
+        right: 16px;
+
+        bottom: 16px;
+
+        min-width: 0;
+
+      }
+
     }
-</style>
-<main class="page">
+
+  </style>
+
+</head>
+
+<body>
+
+  <main class="page">
 
     <!-- =========================
-         BRAND
-    ========================= -->
+
+         DESKTOP BRAND PANEL
+
+    ========================== -->
 
     <section class="brand-panel">
 
-        <div class="brand-content">
+      <div class="brand-logo">
 
-            <div class="logo">
-                BASEMAX
-            </div>
+        <div class="logo-mark">
 
-            <div class="logo-line"></div>
-
-            <h1 class="brand-title">
-                Gestión financiera con confianza.
-            </h1>
-
-            <p class="brand-description">
-                Accede a tu espacio privado de gestión y consulta
-                tus servicios financieros de forma segura.
-            </p>
+          <span></span>
 
         </div>
 
-        <div class="brand-bottom">
+        BASEMAX
 
-            <div class="security-info">
+      </div>
 
-                <span class="security-dot"></span>
+      <div class="brand-content">
 
-                Conexión segura y protegida
+        <div class="eyebrow">
 
-            </div>
+          Wealth Management
 
         </div>
+
+        <h2>
+
+          Gestión patrimonial
+
+          <strong>con visión.</strong>
+
+        </h2>
+
+        <p class="brand-description">
+
+          Accede a tu espacio financiero y gestiona
+tu información de forma sencilla, segura
+
+          y desde cualquier dispositivo.
+
+        </p>
+
+      </div>
+
+      <div class="security-badge">
+
+        <div class="security-icon">✓</div>
+
+        <span>Conexión protegida y acceso seguro</span>
+
+      </div>
 
     </section>
 
-
     <!-- =========================
-         LOGIN
-    ========================= -->
+
+         LOGIN PANEL
+
+    ========================== -->
 
     <section class="login-panel">
 
-        <div class="login-box">
+      <div class="login-card">
 
-            <h2 class="login-heading">
-                Iniciar sesión
-            </h2>
+        <div class="mobile-logo">
 
-            <p class="login-subtitle">
-                Introduce tus datos para continuar.
-            </p>
+          <div class="logo-mark">
 
+            <span></span>
 
-            <form id="loginForm">
+          </div>
 
-                <!-- USERNAME -->
-
-                <div class="form-group">
-
-                    <label
-                        class="form-label"
-                        for="username"
-                    >
-                        Usuario
-                    </label>
-
-                    <input
-                        class="form-input"
-                        id="username"
-                        name="username"
-                        type="text"
-                        autocomplete="username"
-                        placeholder="Introduce tu usuario"
-                        required
-                    >
-
-                </div>
-
-
-                <!-- PASSWORD -->
-                line-height: 1.6;
-
-        margin-bottom: 35px;
-    }
-
-    /* =========================
-       FORM
-    ========================= */
-
-    .form-group {
-        margin-bottom: 20px;
-    }
-
-    .form-label {
-        display: block;
-
-        margin-bottom: 9px;
-
-        color: #c7d2de;
-
-        font-size: 13px;
-        font-weight: 600;
-    }
-
-    .input-wrapper {
-        position: relative;
-    }
-
-    .form-input {
-        width: 100%;
-        height: 54px;
-
-        padding: 0 16px;
-
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        border-radius: 10px;
-
-        outline: none;
-
-        background: rgba(255, 255, 255, 0.045);
-
-        color: #ffffff;
-
-        font-size: 15px;
-
-        transition: 0.25s ease;
-    }
-
-    .form-input.password {
-        padding-right: 70px;
-    }
-
-    .form-input::placeholder {
-        color: #64778b;
-    }
-
-    .form-input:focus {
-        border-color: rgba(137, 174, 211, 0.8);
-
-        background: rgba(255, 255, 255, 0.07);
-
-        box-shadow:
-            0 0 0 4px rgba(95, 140, 182, 0.08);
-    }
-
-    /* =========================
-       PASSWORD TOGGLE
-    ========================= */
-
-    .password-toggle {
-        position: absolute;
-
-        right: 15px;
-        top: 50%;
-
-        transform: translateY(-50%);
-
-        border: 0;
-
-        background: transparent;
-
-        color: #8194a8;
-
-        cursor: pointer;
-
-        font-size: 13px;
-    }
-
-    .password-toggle:hover {
-        color: #ffffff;
-    }
-
-    /* =========================
-       LOGIN BUTTON
-    ========================= */
-
-    .login-button {
-        width: 100%;
-        height: 55px;
-
-        margin-top: 8px;
-
-        border: 0;
-        border-radius: 10px;
-
-        cursor: pointer;
-
-        color: #ffffff;
-
-        font-size: 15px;
-        font-weight: 700;
-
-        letter-spacing: 0.3px;
-
-        background:
-            linear-gradient(
-                135deg,
-                #345b83,
-                #183a5d
-            );
-
-        box-shadow:
-            0 12px 25px rgba(0, 0, 0, 0.25);
-
-        transition: 0.25s ease;
-    }
-
-    .login-button:hover {
-        transform: translateY(-1px);
-
-        background:
-            linear-gradient(
-                135deg,
-                #416e9b,
-                #20486f
-            );
-
-        box-shadow:
-            0 15px 30px rgba(0, 0, 0, 0.32);
-    }
-
-    .login-button:active {
-        transform: translateY(0);
-    }
-
-    .login-button.loading {
-        pointer-events: none;
-        opacity: 0.75;
-    }
-
-    /* =========================
-       SPINNER
-    ========================= */
-
-    .spinner {
-        display: inline-block;
-
-        width: 16px;
-        height: 16px;
-
-        margin-right: 8px;
-
-        vertical-align: -3px;
-
-        border:
-            2px solid rgba(255, 255, 255, 0.3);
-
-        border-top-color: #ffffff;
-
-        border-radius: 50%;
-
-        animation:
-            spin 0.8s linear infinite;
-    }
-
-    @keyframes spin {
-        to {
-            transform: rotate(360deg);
-        }
-    }
-
-    /* =========================
-       SUPPORT
-    ========================= */
-
-    .support {
-        margin-top: 32px;
-
-        padding-top: 25px;
-
-        border-top:
-            1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .support-title {
-        margin-bottom: 14px;
-
-        color: #cbd5df;
-
-        font-size: 13px;
-        font-weight: 600;
-    }
-
-    .contact-link {
-        display: flex;
-        align-items: center;
-
-        gap: 10px;
-
-        margin-top: 9px;
-
-        color: #8faac4;
-
-        font-size: 13px;
-
-        text-decoration: none;
-
-        transition: 0.2s ease;
-
-        word-break: break-word;
-    }
-
-    .contact-link:hover {
-        color: #ffffff;
-    }
-
-    .contact-icon {
-        width: 28px;
-        height: 28px;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        border-radius: 7px;
-
-        background:
-            rgba(255, 255, 255, 0.06);
-
-        font-size: 13px;
-    }
-
-    /* =========================
-       ERROR TOAST
-    ========================= */
-
-    .toast {
-                addEventListener(
-        "submit",
-        function (event) {
-
-            event.preventDefault();
-
-            /*
-             * Prevent multiple clicks
-             */
-
-            loginButton.classList.add("loading");
-
-            loginButton.innerHTML =
-                '<span class="spinner"></span>Verificando...';
-
-
-            /*
-             * Simulate network/login verification
-             */
-
-            setTimeout(function () {
-
-                loginButton.classList.remove("loading");
-
-                loginButton.textContent =
-                    "Iniciar sesión";
-
-
-                /*
-                 * Login failed
-                 */
-
-                showLoginError();
-
-            }, 1200);
-
-        }
-    );
-
-</script>
-                <div class="form-group">
-
-                    <label
-                        class="form-label"
-                        for="password"
-                    >
-                        Contraseña
-                    </label>
-
-                    <div class="input-wrapper">
-
-                        <input
-                            class="form-input password"
-                            id="password"
-                            name="password"
-                            type="password"
-                            autocomplete="current-password"
-                            placeholder="Introduce tu contraseña"
-                            required
-                        >
-
-                        <button
-                            type="button"
-                            class="password-toggle"
-                            id="togglePassword"
-                            aria-label="Mostrar contraseña"
-                        >
-                            Mostrar
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-                <!-- LOGIN -->
-
-                <button
-                    type="submit"
-                    class="login-button"
-                    id="loginButton"
-                >
-                    Iniciar sesión
-                </button>
-
-            </form>
-
-
-            <!-- SUPPORT -->
-
-            <div class="support">
-
-                <div class="support-title">
-                    Atención al cliente
-                </div>
-
-
-                <a
-                    class="contact-link"
-                    href="https://wa.me/522281932827"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-
-                    <span class="contact-icon">
-                        WA
-                    </span>
-
-                    WhatsApp · +52 228 193 2827
-
-                </a>
-
-
-                <a
-                    class="contact-link"
-                    href="mailto:BASECasaDeBolsaMX@gmail.com"
-                >
-
-                    <span class="contact-icon">
-                        @
-                    </span>
-
-                    BASECasaDeBolsaMX@gmail.com
-
-                </a>
-
-            </div>
+          BASEMAX
 
         </div>
 
+        <h1>Bienvenido de nuevo</h1>
+
+        <p class="login-subtitle">
+
+          Introduce tus datos para acceder a tu espacio.
+
+        </p>
+
+        <form id="loginForm">
+
+          <div class="field">
+
+            <label for="username">
+
+              Teléfono o usuario
+
+            </label>
+
+            <div class="input-wrap">
+
+              <input
+
+                type="text"
+
+                id="username"
+
+                name="username"
+
+                autocomplete="username"
+
+                placeholder="Introduce tu teléfono o usuario"
+
+              >
+
+            </div>
+
+          </div>
+
+          <div class="field">
+
+            <label for="password">
+
+              Contraseña
+
+            </label>
+
+            <div class="input-wrap">
+
+              <input
+
+                type="password"
+
+                id="password"
+
+                name="password"
+
+                class="password-input"
+
+                autocomplete="current-password"
+
+                placeholder="Introduce tu contraseña"
+
+              >
+
+              <button
+
+                type="button"
+
+                class="toggle-password"
+
+                id="togglePassword"
+
+              >
+
+                Mostrar
+
+              </button>
+
+            </div>
+
+          </div>
+
+          <div class="form-row">
+
+            <a
+
+              href="#"
+
+              class="forgot"
+
+              id="forgotPassword"
+
+            >
+
+              ¿Olvidaste tu contraseña?
+
+            </a>
+
+          </div>
+
+          <button
+
+            type="submit"
+
+            class="login-button"
+
+            id="loginButton"
+
+          >
+
+            <span class="button-text">
+
+              Iniciar sesión
+
+            </span>
+
+            <span class="spinner"></span>
+
+          </button>
+
+        </form>
+
+        <div class="secure-note">
+
+          <span class="secure-dot"></span>
+
+          Conexión segura protegida
+
+        </div>
+
+      </div>
+
     </section>
 
-</main>
+  </main>
 
+  <!-- =========================
 
-<!-- =========================
-     LOGIN ERROR
-========================= -->
+       TOAST
 
-<div
+  ========================== -->
+
+  <div
+
     class="toast"
+
     id="toast"
-    role="alert"
+
+    role="status"
+
     aria-live="polite"
->
 
-    <strong>
-        Acceso a la red restringido.
-    </strong>
+  >
 
-    <span>
-        No se pudo completar el inicio de sesión debido a restricciones de red.
-    </span>
+    <div class="toast-icon">!</div>
 
-</div>
+    <div>
 
+      <div class="toast-title" id="toastTitle">
 
-<script>
+        Acceso no disponible
 
-    /* =========================
-       ELEMENTS
-    ========================= */
+      </div>
 
-    const passwordInput =
-        document.getElementById("password");
+      <div class="toast-message" id="toastMessage">
 
-    const togglePassword =
-        document.getElementById("togglePassword");
+        No se pudo completar la solicitud.
 
-    const loginForm =
-        document.getElementById("loginForm");
+      </div>
 
-    const loginButton =
-        document.getElementById("loginButton");
+    </div>
 
-    const toast =
-        document.getElementById("toast");
+  </div>
 
+  <script>
 
-    /* =========================
-       SHOW / HIDE PASSWORD
-    ========================= */
+    const form = document.getElementById("loginForm");
 
-    togglePassword.addEventListener(
-        "click",
-        function () {
+    const password = document.getElementById("password");
 
-            const isPassword =
-                passwordInput.type === "password";
+    const togglePassword = document.getElementById("togglePassword");
 
-            passwordInput.type =
-                isPassword ? "text" : "password";
+    const loginButton = document.getElementById("loginButton");
 
-            togglePassword.textContent =
-                isPassword ? "Ocultar" : "Mostrar";
+    const toast = document.getElementById("toast");
 
-            togglePassword.setAttribute(
-                "aria-label",
-                isPassword
-                    ? "Ocultar contraseña"
-                    : "Mostrar contraseña"
-            );
-        }
-    );
+    const toastTitle = document.getElementById("toastTitle");
 
+    const toastMessage = document.getElementById("toastMessage");
+
+    let toastTimer;
 
     /* =========================
-       SHOW LOGIN ERROR
-    ========================= */
 
-    function showLoginError() {
+       PASSWORD SHOW / HIDE
 
-        toast.classList.add("show");
+    ========================== */
 
-        setTimeout(function () {
+    togglePassword.addEventListener("click", () => {
 
-            toast.classList.remove("show");
+      const isPassword =
 
-        }, 5000);
-    }
+        password.type === "password";
 
+      password.type =
+
+        isPassword ? "text" : "password";
+
+      togglePassword.textContent =
+
+        isPassword ? "Ocultar" : "Mostrar";
+
+    });
 
     /* =========================
-       LOGIN
-    ========================= */
 
-    loginForm.
-        <title>BASEMAX</title>
+       TOAST
 
-<style>
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
+    ========================== */
 
-    html,
-    body {
-        width: 100%;
-        min-height: 100%;
-    }
+    function showToast(title, message) {
 
-    body {
-        font-family:
-            -apple-system,
-            BlinkMacSystemFont,
-            "Segoe UI",
-            Roboto,
-            Helvetica,
-            Arial,
-            sans-serif;
+      toastTitle.textContent = title;
 
-        background:
-            radial-gradient(
-                circle at 20% 20%,
-                rgba(43, 76, 120, 0.35),
-                transparent 35%
-            ),
-            radial-gradient(
-                circle at 80% 80%,
-                rgba(16, 48, 85, 0.4),
-                transparent 35%
-            ),
-            #071321;
+      toastMessage.textContent = message;
 
-        color: #ffffff;
-        min-height: 100vh;
+      toast.
+        classList.add("show");
 
-        display: flex;
-        align-items: center;
-        justify-content: center;
+      clearTimeout(toastTimer);
 
-        padding: 30px;
-    }
+      toastTimer = setTimeout(() => {
 
-    .page {
-        width: 100%;
-        max-width: 1180px;
-        min-height: 680px;
+        toast.classList.remove("show");
 
-        display: grid;
-        grid-template-columns: 1fr 480px;
+      }, 4500);
 
-        overflow: hidden;
-
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        border-radius: 24px;
-
-        background: rgba(10, 25, 42, 0.88);
-
-        box-shadow:
-            0 35px 80px rgba(0, 0, 0, 0.45),
-            inset 0 1px 0 rgba(255, 255, 255, 0.05);
-
-        backdrop-filter: blur(18px);
     }
 
     /* =========================
-       LEFT BRAND PANEL
-    ========================= */
 
-    .brand-panel {
-        position: relative;
+       LOGIN DEMO
 
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+       No credentials are sent
 
-        padding: 55px;
+       or stored.
 
-        overflow: hidden;
+    ========================== */
 
-        background:
-            linear-gradient(
-                145deg,
-                rgba(17, 42, 70, 0.95),
-                rgba(7, 20, 34, 0.96)
-            );
-    }
+    form.addEventListener("submit", (event) => {
 
-    .brand-panel::before {
-        content: "";
+      event.preventDefault();
 
-        position: absolute;
+      loginButton.classList.add("loading");
 
-        width: 420px;
-        height: 420px;
+      setTimeout(() => {
 
-        border-radius: 50%;
+        loginButton.classList.remove("loading");
 
-        background: rgba(76, 139, 202, 0.12);
+        showToast(
 
-        top: -170px;
-        left: -150px;
+          "Acceso no disponible",
 
-        filter: blur(5px);
-    }
+          "No se pudo completar el inicio de sesión debido a restricciones de red."
 
-    .brand-panel::after {
-        content: "";
+        );
 
-        position: absolute;
+      }, 1100);
 
-        width: 360px;
-        height: 360px;
-
-        border-radius: 50%;
-
-        border: 1px solid rgba(255, 255, 255, 0.06);
-
-        right: -180px;
-        bottom: -150px;
-    }
-
-    .brand-content,
-    .brand-bottom {
-        position: relative;
-        z-index: 2;
-    }
-
-    .logo {
-        font-size: 32px;
-        font-weight: 800;
-        letter-spacing: 7px;
-        color: #ffffff;
-    }
-
-    .logo-line {
-        width: 48px;
-        height: 3px;
-
-        margin-top: 16px;
-
-        border-radius: 10px;
-
-        background:
-            linear-gradient(
-                90deg,
-                #ffffff,
-                #7b9bbd
-            );
-    }
-
-    .brand-title {
-        margin-top: 125px;
-
-        max-width: 520px;
-
-        font-size: 48px;
-        line-height: 1.1;
-
-        font-weight: 700;
-
-        letter-spacing: -1px;
-    }
-
-    .brand-description {
-        margin-top: 25px;
-
-        max-width: 480px;
-
-        color: #aebdcd;
-
-        font-size: 17px;
-        line-height: 1.7;
-    }
-
-    .security-info {
-        display: flex;
-        align-items: center;
-
-        gap: 12px;
-
-        color: #9eafc1;
-
-        font-size: 13px;
-    }
-
-    .security-dot {
-        width: 9px;
-        height: 9px;
-
-        border-radius: 50%;
-
-        background: #69c59b;
-
-        box-shadow:
-            0 0 14px rgba(105, 197, 155, 0.7);
-    }
+    });
 
     /* =========================
-       RIGHT LOGIN PANEL
-    ========================= */
 
-    .login-panel {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+       FORGOT PASSWORD
 
-        padding: 45px;
+    ========================== */
 
-        background: rgba(5, 17, 29, 0.7);
-    }
+    document
 
-    .login-box {
-        width: 100%;
-        max-width: 370px;
-    }
+      .getElementById("forgotPassword")
 
-    .login-heading {
-        font-size: 34px;
+      .addEventListener("click", (event) => {
 
-        font-weight: 700;
+        event.preventDefault();
 
-        margin-bottom: 10px;
-    }
+        showToast(
 
-    .login-subtitle {
-        color: #93a6ba;
+          "Recuperación de acceso",
 
-        font-size: 14px;
-        
+          "La recuperación de contraseña no está disponible en esta versión de demostración."
+
+        );
+
+      });
+
+  </script>
+
+</body>
+
+</html>
